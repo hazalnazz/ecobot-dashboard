@@ -7,13 +7,13 @@ SISTEM_GUC = {
     "Autonomous Electric Car": 2000  # Assuming Tesla Roadster power usage
 }
 
-# Model dosya yolları (Proje kök dizinine göreceli)
+# Model dosya yolları (GitHub raw URLs)
 MODEL_PATHS = {
-    "Attack UAV": "models/attack_uav/scene.gltf",
-    "Drone": "models/drone/scene.gltf",
-    "Industrial Robot Arm": "models/industrial_robot_arm/scene.gltf",
-    "Robot Vacuum Cleaner": "models/robot_vacuum_cleaner_low_poly/scene.gltf",
-    "Autonomous Electric Car": "models/tesla_roadster_2020/scene.gltf"
+    "Attack UAV": "https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/models/attack_uav/scene.gltf",
+    "Drone": "https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/models/drone/scene.gltf",
+    "Industrial Robot Arm": "https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/models/industrial_robot_arm/scene.gltf",
+    "Robot Vacuum Cleaner": "https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/models/robot_vacuum_cleaner_low_poly/scene.gltf",
+    "Autonomous Electric Car": "https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/models/tesla_roadster_2020/scene.gltf"
 }
 
 # Enerji kaynaklarına göre CO2 salım çarpanları (g/kWh)
@@ -44,6 +44,3 @@ SURDURULEBILIRLIK_ESIK = {
     "E": 2000,
     "F": float('inf')
 }
-
-# Static file server URL (Update if you use a different port)
-STATIC_SERVER_URL = "http://localhost:8502/" # Ensure this matches streamlit_static_server.py PORT

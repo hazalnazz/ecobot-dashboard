@@ -42,18 +42,10 @@ EcoBot, otonom sistemlerin enerji tüketimi ve karbon ayak izini analiz etmek i�
     pip install -e .
     ```
 
-3.  **Uygulamayı Çalıştırma (İki Adım):**
-
-    a.  **Statik Dosya Sunucusunu Başlatın:** 3D modelleri sunmak için ayrı bir terminalde aşağıdaki komutu çalıştırın ve çalışır durumda bırakın:
-        ```bash
-        python streamlit_static_server.py
-        ```
-        *(Bu sunucu `http://localhost:8502` adresinden model dosyalarını sunacaktır.)*
-
-    b.  **Streamlit Uygulamasını Başlatın:** Başka bir terminalde (sanal ortam aktifken) Streamlit uygulamasını çalıştırın:
-        ```bash
-        streamlit run main.py
-        ```
+3.  **Streamlit Uygulamasını Başlatın:**
+    ```bash
+    streamlit run main.py
+    ```
 
     Uygulama şimdi tarayıcınızda açılmalıdır.
 

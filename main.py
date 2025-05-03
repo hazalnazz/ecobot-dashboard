@@ -4,11 +4,12 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
 from pathlib import Path
+import requests
 
 # Import configurations and calculations
 from config import (
     SISTEM_GUC, MODEL_PATHS, CO2_CARPAN, VERIMLILIK_CARPAN,
-    SURDURULEBILIRLIK_ESIK, STATIC_SERVER_URL
+    SURDURULEBILIRLIK_ESIK
 )
 from calculations import (
     hesapla_karbon_ayakizi, surdurulebilirlik_puani, hesapla_zaman_bazli_etki
@@ -21,19 +22,19 @@ from model_viewer import display_3d_model
 def get_license_info(sistem_tipi):
     """Retrieves license information for the selected system's model."""
     if sistem_tipi in MODEL_PATHS:
-        model_rel_path = Path(MODEL_PATHS[sistem_tipi])
-        # Assume license.txt is in the same directory as the model file
-        license_path = model_rel_path.parent / "license.txt"
-        # Construct absolute path relative to this script's location
-        abs_license_path = Path(__file__).parent / license_path
-        if abs_license_path.exists():
-            try:
-                with open(abs_license_path, 'r', encoding='utf-8') as f:
-                    return license_path.as_posix(), f.read() # Return relative path and content
-            except Exception as e:
-                return license_path.as_posix(), f"Error reading license file: {e}"
-        else:
-            return license_path.as_posix(), "License file not found."
+        model_path = MODEL_PATHS[sistem_tipi]
+        # Get repository path from model URL
+        repo_path = model_path.replace("https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/", "")
+        license_path = Path(repo_path).parent / "license.txt"
+        try:
+            license_url = f"https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/{license_path}"
+            response = requests.get(license_url)
+            if response.status_code == 200:
+                return str(license_path), response.text
+            else:
+                return str(license_path), f"Error fetching license: HTTP {response.status_code}"
+        except Exception as e:
+            return str(license_path), f"Error reading license file: {e}"
     return "N/A", "Model path not defined."
 
 # --- UI Rendering Functions ---

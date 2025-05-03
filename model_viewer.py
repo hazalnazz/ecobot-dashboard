@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 from pathlib import Path
-from config import STATIC_SERVER_URL  # Import the base URL for the static server
+import requests
 
 def create_model_viewer_html(model_url, height):
     """
@@ -126,45 +126,35 @@ def create_model_viewer_html(model_url, height):
     """
     return html
 
-def get_model_url(relative_path):
-    """Constructs the full URL for a model file using the static server base URL."""
-    # Ensure relative_path uses forward slashes for URL
-    relative_path = relative_path.replace("\\", "/")
-    # Combine base URL and relative path
-    return f"{STATIC_SERVER_URL}{relative_path}"
+def get_model_url(model_path):
+    """Returns the model URL, handling both local and remote paths."""
+    return model_path  # All paths should now be URLs
 
-def display_3d_model(relative_model_path, height=400):
+def display_3d_model(model_url, height=400):
     """
-    Display a 3D model in Streamlit using its relative path.
-    Requires the streamlit_static_server.py to be running.
-
+    Display a 3D model in Streamlit using its URL.
+    
     Args:
-        relative_model_path: Relative path to the GLTF model file from project root
-                             (e.g., "models/drone/scene.gltf").
+        model_url: URL to the GLTF model file
         height: Height of the viewer in pixels.
     """
-    # Construct the full URL for the model
-    model_url = get_model_url(relative_model_path)
-
-    # Check if the local file actually exists before attempting to display
-    # This check uses the relative path from the project root
-    project_root = Path(__file__).parent.absolute()
-    full_local_path = project_root / relative_model_path
-
-    if not full_local_path.exists():
-        st.error(f"Model file not found locally: {full_local_path}")
-        st.warning(f"Attempted to load from URL: {model_url}")
-        st.info("Please ensure the model file exists and the static server is running.")
+    # Verify URL is accessible
+    try:
+        response = requests.head(model_url)
+        if response.status_code != 200:
+            raise Exception(f"URL returned status code {response.status_code}")
+    except Exception as e:
+        st.error(f"Error accessing model URL: {e}")
         st.markdown(f"""
         <div style="height: {height}px; border: 1px dashed red; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 10px;">
             <p style="color: red; font-weight: bold;">3D Model Error</p>
-            <p style="font-size: small;">Could not find model file:</p>
-            <p style="font-size: small; font-family: monospace;">{relative_model_path}</p>
-            <p style="font-size: small;">Ensure the file exists and the static server is running.</p>
+            <p style="font-size: small;">Could not access model URL:</p>
+            <p style="font-size: small; font-family: monospace;">{model_url}</p>
+            <p style="font-size: small;">Check your internet connection and model URL.</p>
         </div>
         """, unsafe_allow_html=True)
         return
 
     # Generate and display the HTML component
     html_content = create_model_viewer_html(model_url, height)
-    st.components.v1.html(html_content, height=height + 20)  # Add some padding
+    st.components.v1.html(html_content, height=height + 20)
