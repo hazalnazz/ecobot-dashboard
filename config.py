@@ -1,15 +1,15 @@
-# Sistem güç tüketimleri (Watt)
-SISTEM_GUC = {
-    "Attack UAV": 120,
-    "Drone": 100,
-    "Industrial Robot Arm": 800,
+# Average continuous power demand (Watts)
+SISTEM_GUC = {          # kWh/saat
+    "UCAV": 40000,
+    "Drone": 150,
+    "Industrial Robot Arm": 3000,
     "Robot Vacuum Cleaner": 60,
-    "Autonomous Electric Car": 2000  # Assuming Tesla Roadster power usage
+    "Autonomous Electric Car": 18000
 }
 
 # Model dosya yolları (GitHub raw URLs)
 MODEL_PATHS = {
-    "Attack UAV": "https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/models/attack_uav/scene.gltf",
+    "UCAV": "https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/models/attack_uav/scene.gltf",
     "Drone": "https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/models/drone/scene.gltf",
     "Industrial Robot Arm": "https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/models/industrial_robot_arm/scene.gltf",
     "Robot Vacuum Cleaner": "https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/models/robot_vacuum_cleaner_low_poly/scene.gltf",
@@ -18,29 +18,29 @@ MODEL_PATHS = {
 
 # Enerji kaynaklarına göre CO2 salım çarpanları (g/kWh)
 CO2_CARPAN = {
-    "Şebeke Elektriği": 476,
-    "Güneş Enerjisi": 45,
-    "Batarya": 200,  # Example value, depends on battery production/source
-    "Rüzgar Enerjisi": 11,
-    "Hibrit (Güneş+Batarya)": 120 # Example value
+    "Şebeke Elektriği":         391,    # Turkey 2024 average
+    "Güneş Enerjisi":           20,     # Utility‑scale PV median (10–36 g)
+    "Batarya":                  100,    # Mid‑range Li‑ion storage (9–135 g/kWh delivered)
+    "Rüzgar Enerjisi":          7,      # Modern on‑shore wind (5–8 g)
+    "Hibrit (Güneş+Batarya)":   60      # Simple 50 % PV + 50 % storage blend
 }
 
-# Verimlilik modlarına göre çarpanlar
+# Efficiency‑mode multipliers (kept, but renamed for clarity)
 VERIMLILIK_CARPAN = {
     "Normal": 1.0,
     "Verimli": 0.8,
-    "Yoğun Kullanım": 1.2,
     "Ultra Verimli": 0.6,
+    "Yoğun Kullanım": 1.2,
     "Maksimum Performans": 1.5
 }
 
-# Sürdürülebilirlik puanlama sistemi için eşik değerler (gram CO2/günlük kullanım)
+# Daily‑emission label thresholds (g CO₂ / gün)
 SURDURULEBILIRLIK_ESIK = {
-    "A+": 50,
-    "A": 100,
-    "B": 200,
-    "C": 500,
-    "D": 1000,
-    "E": 2000,
-    "F": float('inf')
+    "A+": 30,
+    "A": 80,
+    "B": 150,
+    "C": 400,
+    "D": 800,
+    "E": 1600,
+    "F": float("inf")
 }

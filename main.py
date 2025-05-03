@@ -27,7 +27,7 @@ def get_license_info(sistem_tipi):
         repo_path = model_path.replace("https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/", "")
         license_path = Path(repo_path).parent / "license.txt"
         try:
-            license_url = f"https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/{license_path}"
+            license_url = f"https://raw.githubusercontent.com/hazalnazz/ecobot-dashboard/main/{license_path}".replace("\\", "/")
             response = requests.get(license_url)
             if response.status_code == 200:
                 return str(license_path), response.text
@@ -109,7 +109,7 @@ def display_analysis_tab(enerji_kwh, co2_salimi, surdurulebilirlik_skoru, sistem
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("⚡ Günlük Enerji Tüketimi", f"{enerji_kwh:.3f} kWh")
+        st.metric("⚡ Günlük Enerji Tüketimi", f"{enerji_kwh:} kWh")
     with col2:
         st.metric("💨 Günlük CO₂ Salımı", f"{co2_salimi:.2f} g")
     with col3:
