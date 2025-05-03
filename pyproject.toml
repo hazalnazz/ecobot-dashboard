@@ -1,0 +1,12 @@
+[project]
+name = "ecobot"
+version = "0.1.0"
+description = "EcoBot - Otonom sistemlerin sürdürülebilirlik analizi için dijital araç"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2.3",
+    "plotly>=6.0.1",
+    "streamlit>=1.44.1",
+    "protobuf>=3.20.0,<4.0.0",
+]

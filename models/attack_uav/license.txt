@@ -1,0 +1,11 @@
+Model Information:
+* title:	Attack UAV
+* source:	https://sketchfab.com/3d-models/attack-uav-d11afe89092b41e4a06c93709dc4ee2f
+* author:	Punin8r (https://sketchfab.com/Punin8r)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Attack UAV" (https://sketchfab.com/3d-models/attack-uav-d11afe89092b41e4a06c93709dc4ee2f) by Punin8r (https://sketchfab.com/Punin8r) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
