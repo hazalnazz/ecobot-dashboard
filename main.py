@@ -348,7 +348,7 @@ def main():
     <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9em; color: #555;">
         <span>🌿 EcoBot v2.2</span>
         <span>Son Hesaplama: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</span>
-        <span><a href="https://github.com/your-repo/ecobot" target="_blank">GitHub</a></span>
+        <span><a href="https://github.com/hazalnazz/ecobot-dashboard" target="_blank">GitHub</a></span>
     </div>
     """, unsafe_allow_html=True)
 

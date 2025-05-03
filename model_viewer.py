@@ -17,7 +17,7 @@ def create_model_viewer_html(model_url, height):
         <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
 
         <div id="{unique_id}" style="width: 100%; height: 100%;">
-            <div id="loading-indicator-{unique_id}" style="text-align: center; padding-top: 50px;">
+            <div id="loading-indicator-{unique_id}" style="text-align: center; padding-top: 50px; color: white; font-weight: bold;">
                 Loading 3D model...
             </div>
             <div id="error-container-{unique_id}" style="display:none; color:red; text-align:center; padding:20px;"></div>
@@ -77,9 +77,12 @@ def create_model_viewer_html(model_url, height):
                     console.log('Model successfully loaded:', '{model_url}');
                 }},
                 function(xhr) {{ // Progress
-                    const percentComplete = xhr.loaded / xhr.total * 100;
-                    loadingIndicator.textContent = `Loading: ${{Math.round(percentComplete)}}%`;
-                    console.log(`Model loading progress: ${{Math.round(percentComplete)}}%`);
+                    const totalFileSize = 2 * 1024 * 1024; // ~2MB varsayılan boyut
+                    const loaded = xhr.loaded || 0;
+                    const total = xhr.lengthComputable ? xhr.total : totalFileSize;
+                    const percentComplete = (loaded / total * 100).toFixed(1);
+                    loadingIndicator.textContent = `Loading: ${{percentComplete}}%`;
+                    console.log(`Model loading progress: ${{percentComplete}}%`);
                 }},
                 function(error) {{ // Error
                     console.error('Error loading model:', error);
