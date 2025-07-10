@@ -7,6 +7,9 @@ wheels/
 *.egg-info/
 *.egg
 
+# Project data (large files – do NOT track)
+data/
+
 # Virtual environments
 .venv/
 venv/
